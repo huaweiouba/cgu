@@ -18,4 +18,7 @@ cgu del 删除git用户
 ```
 
 不需要记住复杂的命令，所有命令都是自动的
-![](https://img.sunhuawei.com/uPic/20210727/PUGuiU.gif)
+[![WHN4Bt.gif](https://z3.ax1x.com/2021/07/29/WHN4Bt.gif)](https://imgtu.com/i/WHN4Bt)
+
+ps:
+感谢 [toby](https://github.com/tob) 大佬的第一个star，没错，cgu里面炫酷的cli使用 [bubbletea](https://github.com/charmbracelet/bubbletea)
