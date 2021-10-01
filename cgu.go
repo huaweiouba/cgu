@@ -15,7 +15,7 @@ var (
 	ErrNotGitDir    = errors.New("not git dir")
 	ErrCguUserExist = errors.New("cgu user exist")
 )
-var GithubIssuesUrl = "www.baidu.com"
+var GithubIssuesUrl = "https://github.com/huaweiouba/cgu/issues"
 
 func main() {
 	var err error
@@ -186,7 +186,7 @@ func getGlobalUser() (string, string, error) {
 	}
 	cfg, err := ini.Load(globalPath)
 	if err != nil {
-		return "", "", fmt.Errorf("加载配置文件失败: %w", err)
+		return "", "", fmt.Errorf("加载git配置文件失败: %w", err)
 	}
 	name := cfg.Section("user").Key("name").String()
 	email := cfg.Section("user").Key("email").String()
@@ -203,7 +203,7 @@ func getGlobalGitPath() (string, error) {
 func getProjectGitPath() (string, error) {
 	projectGitPath, err := exec.Command("git", "rev-parse", "--absolute-git-dir").Output()
 	if err != nil {
-		return "", fmt.Errorf("获取git项目配置文件失败: %w", err)
+		return "", fmt.Errorf("git命令执行失败: %w", err)
 	}
 	return string(projectGitPath[0:len(projectGitPath)-1]) + "/config", nil
 }
@@ -252,6 +252,7 @@ func getCguConfigPath() (string, error) {
 
 func writeCguUser(name string, email string) error {
 	cguConfigPath, err := getCguConfigPath()
+	_, err = os.Stat(cguConfigPath)
 	if err != nil {
 		//创建文件
 		f, err := os.Create(cguConfigPath)
